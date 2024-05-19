@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="transactions_report"
-              pageWidth="595"
-              pageHeight="842"
-              columnWidth="555"
-              leftMargin="20"
-              rightMargin="20"
-              topMargin="20"
-              bottomMargin="20"
-              uuid="1a2b3c4d-5e6f-7g8h-9i0j-1234567890ab">
+              name="financial_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f1a6e6d-2bda-4a3f-a3e6-5e2b6c6e4999">
 
-    <parameter name="createdBy" class="java.lang.String"/>
+    <parameter name="userId" class="java.lang.Integer"/>
+    <parameter name="totalAmount" class="java.lang.Double"/>
 
     <queryString>
         <![CDATA[]]>
@@ -21,105 +12,66 @@
 
     <field name="id" class="java.lang.Long"/>
     <field name="userId" class="java.lang.Integer"/>
-    <field name="amount" class="java.math.BigDecimal"/>
-    <field name="type" class="java.lang.String"/>
-    <field name="category" class="java.lang.String"/>
-    <field name="status" class="java.lang.String"/>
-    <field name="description" class="java.lang.String"/>
-    <field name="currency" class="java.lang.String"/>
-    <field name="bank" class="java.lang.String"/>
-    <field name="transactionTime" class="java.time.LocalDateTime"/>
+    <field name="amount" class="java.lang.Double"/>
+    <field name="timestamp" class="java.time.LocalDateTime"/>
+
+    <background>
+        <band splitType="Stretch"/>
+    </background>
 
     <title>
         <band height="50">
             <staticText>
                 <reportElement x="0" y="0" width="555" height="30"/>
-                <textElement textAlignment="Center">
+                <textElement>
                     <font size="18" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Transaction Report]]></text>
+                <text><![CDATA[Financial Report]]></text>
             </staticText>
-            <textField>
-                <reportElement x="0" y="30" width="555" height="20"/>
-                <textElement textAlignment="Center">
-                    <font size="12"/>
-                </textElement>
-                <textFieldExpression><![CDATA["Created by: " + $P{createdBy}]]></textFieldExpression>
-            </textField>
         </band>
     </title>
 
+    <pageHeader>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["User ID: " + $P{userId}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+
     <columnHeader>
-        <band height="30">
+        <band height="20">
             <staticText>
-                <reportElement x="0" y="0" width="50" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
+                <reportElement x="0" y="0" width="50" height="20"/>
+                <textElement>
                     <font size="12" isBold="true"/>
                 </textElement>
                 <text><![CDATA[ID]]></text>
             </staticText>
             <staticText>
-                <reportElement x="50" y="0" width="50" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
+                <reportElement x="50" y="0" width="100" height="20"/>
+                <textElement>
                     <font size="12" isBold="true"/>
                 </textElement>
                 <text><![CDATA[User ID]]></text>
             </staticText>
             <staticText>
-                <reportElement x="100" y="0" width="70" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
+                <reportElement x="150" y="0" width="100" height="20"/>
+                <textElement>
                     <font size="12" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Amount]]></text>
             </staticText>
             <staticText>
-                <reportElement x="170" y="0" width="50" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
+                <reportElement x="250" y="0" width="200" height="20"/>
+                <textElement>
                     <font size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Type]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="220" y="0" width="70" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Category]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="290" y="0" width="70" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Status]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="360" y="0" width="80" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Description]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="440" y="0" width="60" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Currency]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="500" y="0" width="55" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Bank]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="555" y="0" width="100" height="30"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Transaction Time]]></text>
+                <text><![CDATA[Timestamp]]></text>
             </staticText>
         </band>
     </columnHeader>
@@ -128,53 +80,31 @@
         <band height="20">
             <textField>
                 <reportElement x="0" y="0" width="50" height="20"/>
-                <textElement textAlignment="Center"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="50" y="0" width="50" height="20"/>
-                <textElement textAlignment="Center"/>
+                <reportElement x="50" y="0" width="100" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{userId}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="100" y="0" width="70" height="20"/>
-                <textElement textAlignment="Center"/>
+                <reportElement x="150" y="0" width="100" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="170" y="0" width="50" height="20"/>
-                <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="220" y="0" width="70" height="20"/>
-                <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="290" y="0" width="70" height="20"/>
-                <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="360" y="0" width="80" height="20"/>
-                <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="440" y="0" width="60" height="20"/>
-                <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="500" y="0" width="55" height="20"/>
-                <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{bank}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="555" y="0" width="100" height="20"/>
-                <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{transactionTime}]]></textFieldExpression>
+                <reportElement x="250" y="0" width="200" height="20"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{timestamp}.toString()]]></textFieldExpression>
             </textField>
         </band>
     </detail>
@@ -183,12 +113,11 @@
         <band height="20">
             <textField>
                 <reportElement x="0" y="0" width="555" height="20"/>
-                <textElement textAlignment="Right">
+                <textElement>
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+                <textFieldExpression><![CDATA["Total Amount: $" + $P{totalAmount}]]></textFieldExpression>
             </textField>
         </band>
     </pageFooter>
-
 </jasperReport>

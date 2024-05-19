@@ -42,11 +42,26 @@ public class ReportController {
     }
 
     @PostMapping("/generate")
-    public ResponseEntity<Report> generateReport(
+    public ResponseEntity<String> generateReport(
             @RequestParam Integer userId,
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate) {
         Report report = reportService.generateReport(userId, startDate, endDate);
-        return ResponseEntity.ok(report);
+        String downloadLink = "/api/reports/download/" + report.getId();
+        return ResponseEntity.ok(downloadLink);
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<byte[]> downloadReport(@PathVariable Long id) {
+        return reportRepository.findById(id)
+                .map(report -> {
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + report.getReportName() + "." + report.getReportFormat().toLowerCase());
+                    return ResponseEntity.ok()
+                            .contentType(MediaType.APPLICATION_PDF)
+                            .headers(headers)
+                            .body(report.getReportData());
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }

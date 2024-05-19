@@ -7,3 +7,9 @@
 [submodule "notifications"]
 	path = notifications
 	url = https://github.com/Saint-Pet/notifications.git
+[submodule "reports"]
+	path = reports
+	url = https://github.com/Saint-Pet/reports.git
+[submodule "gateway"]
+	path = gateway
+	url = https://github.com/Saint-Pet/gateway.git

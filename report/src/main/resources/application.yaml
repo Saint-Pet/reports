@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: report
+  datasource:
+    url: jdbc:postgresql://147.45.181.198:5432/smartbudget
+    username: user
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: reporting
+    hibernate:
+      ddl-auto: update
+
+kafka:
+  bootstrap-servers: localhost:9092
+  consumer:
+    group-id: report-consumer-group
+    auto-offset-reset: earliest
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  producer:
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
